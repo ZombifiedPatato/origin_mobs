@@ -1,6 +1,7 @@
 package net.zombified_patato.origin_mobs;
 
 import net.fabricmc.api.ModInitializer;
+import net.zombified_patato.origin_mobs.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,6 @@ public class OriginMobs implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
-		LOGGER.info("Hello Fabric world!");
+		ModItems.registerModItems();
 	}
 }
