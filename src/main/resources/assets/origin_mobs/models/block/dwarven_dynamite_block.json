@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "origin_mobs:block/dwarven_dynamite_block_top",
+    "bottom": "origin_mobs:block/dwarven_dynamite_block_bottom",
+    "side": "origin_mobs:block/dwarven_dynamite_block_side"
+  }
+}
