@@ -10,7 +10,7 @@ import net.zombified_patato.origin_mobs.OriginMobs;
 public class ModItems {
 
     public static final Item FAIRY_POWDER = registerItem("fairy_powder",
-            new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+            new Item(new FabricItemSettings().group(ModItemGroups.ORIGIN_MOBS)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(OriginMobs.MOD_ID, name), item);
