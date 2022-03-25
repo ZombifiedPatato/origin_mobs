@@ -1,9 +1,10 @@
 package net.zombified_patato.origin_mobs;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -15,8 +16,8 @@ import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
 
 import java.util.UUID;
 
-
-public class OriginsMobsClient implements ClientModInitializer {
+@Environment(EnvType.CLIENT)
+public class OriginMobsClient implements ClientModInitializer {
 
     public static final Identifier PACKET_ID = new Identifier(OriginMobs.MOD_ID, "spawn_packet");
 
@@ -27,7 +28,9 @@ public class OriginsMobsClient implements ClientModInitializer {
     }
 
     public void receiveEntityPacket() {
+        System.out.println("running receiveEntityPacket");
         ClientPlayNetworking.registerGlobalReceiver(PACKET_ID, ((client, handler, byteBuf, responseSender) -> {
+            System.out.println("Running for receiver for receiveEntityPacket");
             EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             UUID uuid = byteBuf.readUuid();
             int entityId = byteBuf.readVarInt();

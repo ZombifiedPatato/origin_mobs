@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.zombified_patato.origin_mobs.OriginMobs"
+    ],
+    "client": [
+      "net.zombified_patato.origin_mobs.OriginMobsClient"
     ]
   },
   "mixins": [

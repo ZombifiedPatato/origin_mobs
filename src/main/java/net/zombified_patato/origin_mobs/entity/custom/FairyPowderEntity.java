@@ -1,8 +1,5 @@
 package net.zombified_patato.origin_mobs.entity.custom;
 
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -11,14 +8,11 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import net.zombified_patato.origin_mobs.OriginMobs;
-import net.zombified_patato.origin_mobs.OriginsMobsClient;
+import net.zombified_patato.origin_mobs.OriginMobsClient;
 import net.zombified_patato.origin_mobs.entity.ModEntities;
 import net.zombified_patato.origin_mobs.item.ModItems;
 import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
@@ -83,6 +77,7 @@ public class FairyPowderEntity extends ThrownItemEntity {
 
     @Override
     public Packet<?> createSpawnPacket() {
-        return EntitySpawnPacket.create(this, OriginsMobsClient.PACKET_ID);
+        System.out.println("Creating spawn packet for fairy powder!");
+        return EntitySpawnPacket.create(this, OriginMobsClient.PACKET_ID);
     }
 }
