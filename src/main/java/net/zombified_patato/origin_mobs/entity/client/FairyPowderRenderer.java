@@ -25,7 +25,6 @@ public class FairyPowderRenderer extends EntityRenderer<FairyPowderEntity> {
 
     @Override
     public void render(FairyPowderEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        System.out.println("rendering fairy powder, hopefully");
         MinecraftClient.getInstance().getItemRenderer().renderItem(
             STACK, ModelTransformation.Mode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, entity.getId()
         );
