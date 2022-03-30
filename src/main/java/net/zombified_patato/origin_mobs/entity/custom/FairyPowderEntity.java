@@ -1,20 +1,13 @@
 package net.zombified_patato.origin_mobs.entity.custom;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
-import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
@@ -23,6 +16,7 @@ import net.zombified_patato.origin_mobs.OriginMobsClient;
 import net.zombified_patato.origin_mobs.entity.ModEntities;
 import net.zombified_patato.origin_mobs.item.ModItems;
 import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
+import net.zombified_patato.origin_mobs.particle.ModParticles;
 
 import java.util.List;
 
@@ -57,7 +51,7 @@ public class FairyPowderEntity extends ThrownItemEntity {
     public void handleStatus(byte status) {
         if (status == 3) {
             float radius = 1.0f;
-            ParticleEffect particleEffect = ParticleTypes.CAMPFIRE_COSY_SMOKE;
+            ParticleEffect particleEffect = ModParticles.PINK_SMOKE;
             for (int j = 0; j < 16; ++j) {
                 double velocityZ;
                 double velocityY;
@@ -92,8 +86,8 @@ public class FairyPowderEntity extends ThrownItemEntity {
         if (!list.isEmpty()) {
             for (LivingEntity livingEntity : list) {
                 double distance;
-                if (!((distance = this.squaredDistanceTo(livingEntity)) < 32.0)) continue;
-                double timeMultiplier = 1.0 - Math.sqrt(distance) / 4.0;
+                if (!((distance = this.squaredDistanceTo(livingEntity)) < 36.0)) continue;
+                double timeMultiplier = 1.0 - Math.sqrt(distance) / 6.4;
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING,
                         (int)(timeMultiplier * 600 + 0.5)));
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION,
