@@ -86,12 +86,12 @@ public class FairyPowderEntity extends ThrownItemEntity {
         if (!list.isEmpty()) {
             for (LivingEntity livingEntity : list) {
                 double distance;
-                if (!((distance = this.squaredDistanceTo(livingEntity)) < 36.0)) continue;
-                double timeMultiplier = 1.0 - Math.sqrt(distance) / 6.4;
+                if (!((distance = this.squaredDistanceTo(livingEntity)) < 16.0)) continue;
+                double timeMultiplier = 1.0 - Math.sqrt(distance) / 4;
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING,
-                        (int)(timeMultiplier * 600 + 0.5)));
+                        (int)(timeMultiplier * 200 + 200)));
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION,
-                        (int)(timeMultiplier * 400 + 0.5)));
+                        (int)(timeMultiplier * 200 + 100)));
                 }
             }
         }
