@@ -7,6 +7,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.zombified_patato.origin_mobs.OriginMobs;
+import net.zombified_patato.origin_mobs.entity.custom.DwarvenDynamiteEntity;
 import net.zombified_patato.origin_mobs.entity.custom.FairyPowderEntity;
 
 public class ModEntities {
@@ -17,6 +18,14 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
                     .build()
     );
+
+    public static final EntityType<DwarvenDynamiteEntity> DWARVEN_DYNAMITE = Registry.register(
+            Registry.ENTITY_TYPE, new Identifier(OriginMobs.MOD_ID, "dwarven_dynamite"),
+            FabricEntityTypeBuilder.<DwarvenDynamiteEntity>create(SpawnGroup.MISC, DwarvenDynamiteEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.98f, 0.98f))
+                    .build()
+    );
+
 
     public static void registerModEntities() {
         System.out.println("Registering Mod Entities for " + OriginMobs.MOD_ID);
