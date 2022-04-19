@@ -11,13 +11,14 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.zombified_patato.origin_mobs.OriginMobs;
+import net.zombified_patato.origin_mobs.block.custom.DwarvenDynamiteBlock;
 import net.zombified_patato.origin_mobs.item.ModItemGroups;
 
 
 public class ModBlocks {
 
     public static final Block DWARVEN_DYNAMITE_BLOCK = registerBlock("dwarven_dynamite_block",
-            new TntBlock(FabricBlockSettings.of(Material.STONE).hardness(3f)), ModItemGroups.ORIGIN_MOBS);
+            new DwarvenDynamiteBlock(FabricBlockSettings.of(Material.STONE).hardness(3f)), ModItemGroups.ORIGIN_MOBS);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
