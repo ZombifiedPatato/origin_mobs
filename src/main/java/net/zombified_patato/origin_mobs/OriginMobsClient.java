@@ -24,7 +24,7 @@ import java.util.UUID;
 @Environment(EnvType.CLIENT)
 public class OriginMobsClient implements ClientModInitializer {
 
-    public static final Identifier PACKET_ID = new Identifier(OriginMobs.MOD_ID, "spawn_packet");
+    public static final Identifier SPAWN_PACKET_ID = new Identifier(OriginMobs.MOD_ID, "spawn_packet");
 
     @Override
     public void onInitializeClient(){
@@ -38,7 +38,7 @@ public class OriginMobsClient implements ClientModInitializer {
 
     public void receiveEntityPacket() {
         System.out.println("running receiveEntityPacket");
-        ClientPlayNetworking.registerGlobalReceiver(PACKET_ID, ((client, handler, byteBuf, responseSender) -> {
+        ClientPlayNetworking.registerGlobalReceiver(SPAWN_PACKET_ID, ((client, handler, byteBuf, responseSender) -> {
             System.out.println("Running for receiver for receiveEntityPacket");
             EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             UUID uuid = byteBuf.readUuid();

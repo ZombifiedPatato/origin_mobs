@@ -99,6 +99,6 @@ public class FairyPowderEntity extends ThrownItemEntity {
     @Override
     public Packet<?> createSpawnPacket() {
         System.out.println("Creating spawn packet for fairy powder!");
-        return EntitySpawnPacket.create(this, OriginMobsClient.PACKET_ID);
+        return EntitySpawnPacket.create(this, OriginMobsClient.SPAWN_PACKET_ID);
     }
 }
