@@ -1,6 +1,8 @@
 package net.zombified_patato.origin_mobs.entity.client;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -22,7 +24,7 @@ public class DwarvenDynamiteRenderer extends EntityRenderer<DwarvenDynamiteEntit
     }
 
     @Override
-    public void render(DwarvenDynamiteEntity dwarvenDynamiteEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(DwarvenDynamiteEntity dwarvenDynamiteEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
         matrixStack.translate(0.0, 0.5, 0.0);
         int j = dwarvenDynamiteEntity.getFuse();
@@ -37,9 +39,10 @@ public class DwarvenDynamiteRenderer extends EntityRenderer<DwarvenDynamiteEntit
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90.0f));
         matrixStack.translate(-0.5, -0.5, 0.5);
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0f));
-        TntMinecartEntityRenderer.renderFlashingBlock(ModBlocks.DWARVEN_DYNAMITE_BLOCK.getDefaultState(), matrixStack, vertexConsumerProvider, i, j / 5 % 2 == 0);
+        int i = j / 5 % 2 == 0 ? OverlayTexture.packUv(OverlayTexture.getU(1.0f), 10) : OverlayTexture.DEFAULT_UV;
+        MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(ModBlocks.DWARVEN_DYNAMITE_BLOCK.getDefaultState(), matrixStack, vertexConsumerProvider, light, i);
         matrixStack.pop();
-        super.render(dwarvenDynamiteEntity, f, g, matrixStack, vertexConsumerProvider, i);
+        super.render(dwarvenDynamiteEntity, f, g, matrixStack, vertexConsumerProvider, light);
     }
 
     @Override

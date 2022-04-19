@@ -15,6 +15,9 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -25,10 +28,12 @@ import net.minecraft.world.explosion.Explosion;
 import net.zombified_patato.origin_mobs.entity.custom.DwarvenDynamiteEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class DwarvenDynamiteBlock extends TntBlock {
+public class DwarvenDynamiteBlock extends Block {
 
+    public static final BooleanProperty UNSTABLE = Properties.UNSTABLE;
     public DwarvenDynamiteBlock(Settings settings) {
         super(settings);
+        this.setDefaultState((BlockState)this.getDefaultState().with(UNSTABLE, false));
     }
 
     @Override
@@ -113,6 +118,18 @@ public class DwarvenDynamiteBlock extends TntBlock {
                 world.removeBlock(blockPos, false);
             }
         }
+    }
+
+
+
+    @Override
+    public boolean shouldDropItemsOnExplosion(Explosion explosion) {
+        return false;
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(UNSTABLE);
     }
 
 

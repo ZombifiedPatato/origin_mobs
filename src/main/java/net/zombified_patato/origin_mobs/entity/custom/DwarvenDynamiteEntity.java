@@ -1,24 +1,57 @@
 package net.zombified_patato.origin_mobs.entity.custom;
 
 import net.minecraft.entity.*;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import net.zombified_patato.origin_mobs.OriginMobsClient;
+import net.zombified_patato.origin_mobs.entity.ModEntities;
 import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
 import org.jetbrains.annotations.Nullable;
 
-public class DwarvenDynamiteEntity extends TntEntity {
+public class DwarvenDynamiteEntity extends Entity {
 
+
+    private static final TrackedData<Integer> FUSE = DataTracker.registerData(TntEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final int DEFAULT_FUSE = 80;
+    @Nullable
+    private LivingEntity causingEntity;
 
     public DwarvenDynamiteEntity(EntityType<? extends DwarvenDynamiteEntity> entityType, World world) {
         super(entityType, world);
+        this.intersectionChecked = true;
     }
 
     public DwarvenDynamiteEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter) {
-        super(world, x, y, z, igniter);
+        this((EntityType<? extends DwarvenDynamiteEntity>) ModEntities.DWARVEN_DYNAMITE, world);
+        this.setPosition(x, y, z);
+        double d = world.random.nextDouble() * 6.2831854820251465;
+        this.setVelocity(-Math.sin(d) * 0.02, 0.2f, -Math.cos(d) * 0.02);
         this.setFuse(140);
+        this.prevX = x;
+        this.prevY = y;
+        this.prevZ = z;
+        this.causingEntity = igniter;
+    }
+
+    @Override
+    protected void initDataTracker() {
+        this.dataTracker.startTracking(FUSE, 140);
+    }
+
+    @Override
+    protected Entity.MoveEffect getMoveEffect() {
+        return Entity.MoveEffect.NONE;
+    }
+
+    @Override
+    public boolean collides() {
+        return !this.isRemoved();
     }
 
     @Override
@@ -49,8 +82,37 @@ public class DwarvenDynamiteEntity extends TntEntity {
     }
 
     private void explode() {
-        float f = 6.0F;
-        this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 4.0F, Explosion.DestructionType.BREAK);
+        float power = 7.0F;
+        //ToDo Break all obsidion blocks in imidiat radius
+        this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), power, Explosion.DestructionType.BREAK);
+    }
+
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt) {
+        nbt.putShort("Fuse", (short)this.getFuse());
+    }
+
+    @Override
+    protected void readCustomDataFromNbt(NbtCompound nbt) {
+        this.setFuse(nbt.getShort("Fuse"));
+    }
+
+    @Nullable
+    public LivingEntity getCausingEntity() {
+        return this.causingEntity;
+    }
+
+    @Override
+    protected float getEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 0.15f;
+    }
+
+    public void setFuse(int fuse) {
+        this.dataTracker.set(FUSE, fuse);
+    }
+
+    public int getFuse() {
+        return this.dataTracker.get(FUSE);
     }
 
     @Override
