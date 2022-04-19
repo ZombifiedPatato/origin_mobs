@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.particle.CampfireSmokeParticle;
+import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -15,6 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.zombified_patato.origin_mobs.entity.ModEntities;
+import net.zombified_patato.origin_mobs.entity.client.DwarvenDynamiteRenderer;
 import net.zombified_patato.origin_mobs.entity.client.FairyPowderRenderer;
 import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
 import net.zombified_patato.origin_mobs.particle.ModParticles;
@@ -29,6 +31,7 @@ public class OriginMobsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient(){
         EntityRendererRegistry.register(ModEntities.FAIRY_POWDER, FairyPowderRenderer::new);
+        EntityRendererRegistry.register(ModEntities.DWARVEN_DYNAMITE, DwarvenDynamiteRenderer::new);
         receiveEntityPacket();
 
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((((atlasTexture, registry) ->

@@ -1,9 +1,12 @@
 package net.zombified_patato.origin_mobs.entity.custom;
 
 import net.minecraft.entity.*;
+import net.minecraft.network.Packet;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
+import net.zombified_patato.origin_mobs.OriginMobsClient;
+import net.zombified_patato.origin_mobs.networking.EntitySpawnPacket;
 import org.jetbrains.annotations.Nullable;
 
 public class DwarvenDynamiteEntity extends TntEntity {
@@ -48,5 +51,11 @@ public class DwarvenDynamiteEntity extends TntEntity {
     private void explode() {
         float f = 6.0F;
         this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 4.0F, Explosion.DestructionType.BREAK);
+    }
+
+    @Override
+    public Packet<?> createSpawnPacket() {
+        System.out.println("Creating spawn packet for dwarven dynamite!");
+        return EntitySpawnPacket.create(this, OriginMobsClient.SPAWN_PACKET_ID);
     }
 }
