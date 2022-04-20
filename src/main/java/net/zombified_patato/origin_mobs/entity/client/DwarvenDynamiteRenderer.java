@@ -47,6 +47,7 @@ public class DwarvenDynamiteRenderer extends EntityRenderer<DwarvenDynamiteEntit
 
     @Override
     public Identifier getTexture(DwarvenDynamiteEntity entity) {
-        return new Identifier(OriginMobs.MOD_ID, "textures/entity/dwarven_dynamite/dwarven_dynamite.png");
+        return null;
     }
+
 }
