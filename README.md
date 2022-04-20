@@ -1,5 +1,8 @@
 # origin_mobs
 
+**The mod has been moved to 
+[pumpkin_patch](https://github.com/ZombifiedPatato/pumpkin_patch) and went in a different direction, not taking inspiration from the mods described here anymore.**
+
 A mod that adds some fantasy style items, blocks and mobs, based on certain origins from the mods: 
 [Origins (Apace100)](https://www.curseforge.com/minecraft/mc-mods/origins),
 [Mythical Origins (proman468)](https://www.curseforge.com/minecraft/mc-mods/mythical-origins), 
